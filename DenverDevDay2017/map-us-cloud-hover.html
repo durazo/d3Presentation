@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>US Map with cloud and mouseover</title>
+    <style type="text/css">
+        body{
+            background: rgba(16, 35, 37, 1.0);
+            text-align: center;
+            color: rgba(110,218,231,0.4);
+        }
+        .state{
+            fill: rgba(98,130,137,0.2);
+            stroke: rgba(110,218,231,0.4);
+            stroke-width: 0.25px;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+        }
+        .tooltip {	
+            position: absolute;
+            text-align: center;
+            width: 200px;
+            height: 40px;
+            padding: 2px;
+            background: rgba(98,130,137,0.9);
+            background: rgba(16, 35, 37, 0.9);
+            border: 1px solid rgba(110,218,231,0.4);
+            border-radius: 6px;
+        }
+    </style>
+  </head>
+
+  <body>
+    <h1>D3.js map with cloud providers amd mouse hover</h1>
+    <div id="map-container"></div>
+
+    <script src="Scripts/d3.v4.js"></script>
+    <script src="Scripts/topojson.v1.js"></script>
+    <script>
+        var width = 1024, height = 586;
+        
+        var svg = d3.select("#map-container").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+        var states = svg.append('g').attr('class', 'states');
+        var dataGroup = svg.append('g').attr('id', 'data-group');
+
+        // Define the div for the tooltip
+        var div = d3.select("body").append("div")	
+            .attr("class", "tooltip")				
+            .style("opacity", 0);
+
+        //  Initiated an initial translate on the projection
+        var projection = d3.geoAlbersUsa().translate([width / 2, height / 2]).scale(width);
+        var path = d3.geoPath().projection(projection);
+
+        d3.json("JSON/us-states.json", function(error, us) {
+            if (error) throw error;
+    
+            states.append("g")
+                .attr("class", "states")
+                .selectAll("path")
+                .data(topojson.feature(us, us.objects.states).features)
+                .enter().append("path")
+                        .attr("d", path)
+                        .attr("class", d => ("state state-" + d.id));
+        });
+
+        //  D3 zoom behavior that calls the function zoomed when the 
+        //  zoom action is complete, i.e. for every zoom step
+        var zoom = d3.zoom().on("zoom", zoomed);
+        
+        //  Append the zoom behavior to the map
+        svg.call(zoom);
+        svg.call(zoom.transform, d3.zoomIdentity.translate(width / 2, height / 2));
+
+        function zoomed() {
+            //  Adjust the projection per the zoom event
+            projection.translate([d3.event.transform.x, d3.event.transform.y])
+                        .scale(width * d3.event.transform.k);
+            
+            //  Apply zoom to the states via the projection dependent path          
+            svg.selectAll("path").attr("d", path);
+
+            //  Apply zoom to points on the map
+            zoomPoints();
+        }
+        
+        function cloudProviders() {
+            //  Load the city data from us-cities.json
+            d3.tsv("tsv/cloud-providers.txt", function (error, cloudProviders) {
+                
+                var processedProviders = pointsWithinProjection(cloudProviders);
+                
+                dataGroup.selectAll('circle')
+                    .data(processedProviders, (d) => d.Id)
+                    .enter().append('circle')
+                            .attr('class', 'point')
+                            .attr('r', 10)
+                            .attr('cx', (d) => (projection([d.Longitude, d.Latitude])[0]))
+                            .attr('cy', (d) => projection([d.Longitude, d.Latitude])[1])
+                            .attr('fill', (d) => pointColor(d.Provider))
+                            .on('mouseover', function(d) {
+                                div.transition()
+                                   .duration(100)
+                                   .style("opacity", .9);
+                                div.html(d.Provider + "<br/>"  + d.Name)
+                                   .style("left", (d3.event.pageX + 3) + "px")
+                                   .style("top", (d3.event.pageY + 3) + "px");
+                                })					
+                            .on("mouseout", function(d) {	
+                                div.transition()		
+                                   .duration(200)		
+                                   .style("opacity", 0);
+                                div.transition()
+                                   .delay(200)
+                                   .style("left", "-1000px")		
+                                   .style("top", "-1000px");		
+                            });
+            });
+        }
+        cloudProviders();
+
+        function pointColor(provider){
+            switch(provider){
+                case 'Azure':
+                    //  Blue
+                    return '#0072C6';
+                    break;
+                case 'Amazon':
+                    //  Orange
+                    return '#F99F26';
+                    break;
+                case 'Google':
+                    //  Purple
+                    return '#857EC6';
+                    break;
+            }
+        }
+
+        function zoomPoints(){
+            var mapPoints = svg.selectAll('.point');
+            mapPoints.each(function (d, i) {
+                d3.select(this)
+                  .attr('cx', (d) => (projection([d.Longitude, d.Latitude])[0]))
+                  .attr('cy', (d) => projection([d.Longitude, d.Latitude])[1]);
+            });
+        }
+
+        function pointsWithinProjection(data){
+            //  Function to determine if points lie within projection.
+            //  Creates a new array and returns only points that don't
+            //  error.
+            var processed = [],
+                po,
+                pa;
+            for (var i = 0; i < data.length; i++){
+                try {
+                    po = projection([data[i].Longitude, data[i].Latitude])[0];
+                    pa = projection([data[i].Longitude, data[i].Latitude])[1];
+                    processed.push(data[i]);
+                } catch (ex){
+                    //  do nothing
+                }
+            }
+            return processed;
+        }
+
+    </script>
+  </body>
+
+</html>
