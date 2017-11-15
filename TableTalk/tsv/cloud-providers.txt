@@ -1,0 +1,82 @@
+Id	Provider	Name	Location	Latitude	Longitude	Coming Soon
+1	Azure	East US	Virginia	37.431573	-78.656894	
+2	Azure	East US 2	Virginia	37.206611	-77.386322	
+3	Azure	Central US	Iowa	41.878003	-93.097702	
+4	Azure	North Central US	Illinois	40.633125	-89.398528	
+5	Azure	South Central US	Texas	31.968599	-99.901813	
+6	Azure	West Central US	West Central US	33.513117	-92.403493	
+7	Azure	West US	California	36.778261	-119.417932	
+8	Azure	West US 2	California	38.837522	-120.895824	
+9	Azure	US Gov Virginia	Virginia	36.86031	-76.303579	
+10	Azure	US Gov Iowa	Iowa	41.63315	-93.565063	
+11	Azure	US DoD East	Virginia	37.126655	-80.392456	
+12	Azure	US DoD Central	Iowa	41.993436	-91.708374	
+13	Azure	US Gov Arizona	Arizona	33.42551	-111.940005	
+14	Azure	US Gov Texas	Texas	30.267153	-97.743061	
+15	Azure	Canada East	Quebec City	46.813878	-71.207981	
+16	Azure	Canada Central	Toronto	43.653226	-79.383184	
+17	Azure	Brazil South	Sao Paulo State	-23.543179	-46.629185	
+18	Azure	Southeast Asia	Singapore	1.352083	103.819836	
+19	Azure	East Asia	Hong Kong	22.396428	114.109497	
+20	Azure	Australia East	New South Wales	-31.253218	146.921099	
+21	Azure	Australia Southeast	Victoria	-37.471308	144.785153	
+22	Azure	China East	Shanghai	31.23039	121.473702	
+23	Azure	China North	Beijing	39.9042	116.407396	
+24	Azure	Central India	Pune	18.52043	73.856744	
+25	Azure	West India	Mumbai	19.075984	72.877656	
+26	Azure	South India	Chennai	13.08268	80.270718	
+27	Azure	Japan East	"Tokyo, Saitama"	35.861729	139.645482	
+28	Azure	Japan West	Osaka	34.693738	135.502165	
+29	Azure	Korea Central	Seoul	37.566535	126.977969	
+30	Azure	Korea South	Busan	35.179554	129.075642	
+31	Azure	Australia Central 1	Canberra	-35.280937	149.130009	TRUE
+32	Azure	Australia Central 2	Canberra	-35.3075	149.124417	TRUE
+33	Azure	North Europe	Ireland	53.142367	-7.692054	
+34	Azure	West Europe	Netherlands	52.132633	5.291266	
+35	Azure	UK West	Cardiff	51.481581	-3.17909	
+36	Azure	UK South	London	51.507351	-0.127758	
+37	Azure	Germany Central	Frankfurt	50.110922	8.682127	
+38	Azure	Germany Northeast	Magdeburg	52.120533	11.627624	
+39	Azure	France Central	Paris	48.856614	2.352222	TRUE
+40	Azure	France South	Marseille	43.296482	5.36978	TRUE
+41	Azure	South Africa West	Cape Town	-33.924869	18.424055	TRUE
+42	Azure	South Africa North	Johannesburg	-26.204103	28.047305	TRUE
+43	Google	us-west1	Oregon	43.804133	-120.554201	
+44	Google	Los Angeles	Los Angeles	34.052234	-118.243685	TRUE
+45	Google	us-central1	Iowa	41.277033	-93.845173	
+46	Google	us-east1	South Carolina	33.836081	-81.163725	
+47	Google	us-east4	North Virginia	37.478397	-76.453077	
+48	Google	Montreal	Montreal	45.501689	-73.567256	TRUE
+49	Google	southamerica-east1	Sao Paulo	-23.55052	-46.633309	
+50	Google	europe-west2	London	51.507351	-0.127758	
+51	Google	europe-west1	Belgium	50.503887	4.469936	
+52	Google	europe-west3	Frankfurt	50.110922	8.682127	
+53	Google	Netherlands	Netherlands	52.132633	5.291266	TRUE
+54	Google	Finland	Finland	61.92411	25.748151	TRUE
+55	Google	asia-south1	Mumbai	19.075984	72.877656	
+56	Google	asia-southeast1	Singapore	1.38292	103.989544	
+57	Google	asia-east1	Taiwan	23.611497	120.248108	
+58	Google	asia-northeast1	Tokyo	35.790804	139.64447	
+59	Google	australia-southeast1	Sydney	-33.958312	151.229553	
+60	Amazon	US East	Northern Virginia	39.304019	-77.514038	
+61	Amazon	US East	Ohio	40.306498	-83.52356	
+62	Amazon	US West	Oregon	44.047129	-122.991943	
+63	Amazon	US West	Northern California	41.143501	-123.464355	
+64	Amazon	AWS GovCloud	Northern California	39.738874	-122.695313	
+65	Amazon	Canada Central	Toronto	43.886883	-78.885956	
+66	Amazon	South America	Sao Paulo	-23.717625	-46.587524	
+67	Amazon	Europe	Ireland	53.890582	-8.679199	
+68	Amazon	Europe	London	51.506926	-0.303497	
+69	Amazon	Europe	Frankfurt	50.076312	8.536377	
+70	Amazon	Asia Pacific	Singapore	1.31953	103.688278	
+71	Amazon	Asia Pacific	Seoul	37.554308	127.062378	
+72	Amazon	Asia Pacific	Tokyo	35.696271	139.597778	
+73	Amazon	Asia Pacific	Mumbai	18.963117	72.828369	
+74	Amazon	Asia Pacific	Sydney	-33.927694	151.00708	
+75	Amazon	China	Beijing	39.980803	116.856079	
+76	Amazon	Bahrain	Bahrain	26.0667	50.5577	TRUE
+77	Amazon	China	China	35.86166	104.195397	TRUE
+78	Amazon	France	France	46.227638	2.213749	TRUE
+79	Amazon	Hong Kong	Hong Kong	22.402062	114.005127	TRUE
+80	Amazon	Sweden	Sweden	60.128161	18.643501	TRUE
+81	Amazon	AWS GovCloud	Northern Virginia	39.469065	-78.134766	TRUE
