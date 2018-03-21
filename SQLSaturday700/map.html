@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>US Map</title>
+    <style type="text/css">
+        .state{
+            stroke: #000;
+            stroke-width: 2px;
+        }
+    </style>
+  </head>
+
+  <body>
+    <h1>D3js map</h1>
+    <div id="map-container"></div>
+
+    <script src="Scripts/d3.v4.js"></script>
+    <script src="Scripts/topojson.v1.js"></script>
+    <script>
+        var width = 1024, height = 586;
+        
+        var svg = d3.select("#map-container").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+        
+        var projection = d3.geoAlbersUsa();
+        var path = d3.geoPath().projection(projection);
+
+        d3.json("JSON/us-states.json", function(error, us) {
+            if (error) throw error;
+    
+            svg.append("g")
+                .attr("class", "states")
+                .selectAll("path")
+                .data(topojson.feature(us, us.objects.states).features)
+                    .enter().append("path")
+                            .attr("d", path)
+                            .attr("class", "state");
+        });
+
+
+
+    </script>
+  </body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>US Map</title>
+    <style type="text/css">
+        body{
+            background: rgba(16, 35, 37, 1.0);
+            text-align: center;
+            color: rgba(110,218,231,0.4);
+        }
+        .state{
+            fill: rgba(98,130,137,0.2);
+            stroke: rgba(110,218,231,0.4);
+            stroke-width: 0.25px;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+        }
+    </style>
+  </head>
+
+  <body>
+    <h1>D3js map with zoom</h1>
+    <div id="map-container"></div>
+
+    <script src="Scripts/d3.v4.js"></script>
+    <script src="Scripts/topojson.v1.js"></script>
+    <script>
+        var width = 1024, height = 586;
+        
+        var svg = d3.select("#map-container").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+        
+        //  Initiated an initial translate on the projection
+        var projection = d3.geoAlbersUsa().translate([width / 2, height / 2]).scale(width);
+        var path = d3.geoPath().projection(projection);
+
+        d3.json("JSON/us-states.json", function(error, us) {
+            if (error) throw error;
+    
+            svg.append("g")
+                .attr("class", "states")
+                .selectAll("path")
+                .data(topojson.feature(us, us.objects.states).features)
+                .enter().append("path")
+                        .attr("d", path)
+                        .attr("class", d => ("state state-" + d.id));
+        });
+
+        //  D3 zoom behavior that calls the function zoomed when the 
+        //  zoom action is complete, i.e. for every zoom step
+        var zoom = d3.zoom().on("zoom", zoomed);
+        
+        //  Append the zoom behavior to the map
+        svg.call(zoom);
+        svg.call(zoom.transform, d3.zoomIdentity.translate(width / 2, height / 2));
+
+        function zoomed() {
+            //  Adjust the projection per the zoom event
+            console.log(d3.event.transform);
+            projection.translate([d3.event.transform.x, d3.event.transform.y])
+                        .scale(width * d3.event.transform.k);
+            
+            //  Apply zoom to the states via the projection dependent path          
+            svg.selectAll("path").attr("d", path);
+        }
+
+    </script>
+  </body>
+
+</html>
