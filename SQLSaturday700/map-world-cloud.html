@@ -54,13 +54,11 @@
 
         //  Initiated an initial translate on the projection
         var projection = d3.geoMercator();
-        //var projection = d3.geoEquirectangular();
-        //var projection = d3.geoTransverseMercator();
+        // var projection = d3.geoTransverseMercator();
+        // var projection = d3.geoEquirectangular();
+        // var projection = d3.geoNaturalEarth1();
 		
 		
-        //  var projection = d3.geoNaturalEarth1();
-        // var projection = d3.geoMercator();
-        // var projection = d3.geoMercator();
         var path = d3.geoPath().projection(projection);
 
         d3.json("JSON/world-topo.json", function (error, world) {
@@ -78,7 +76,8 @@
         
         //  Append the zoom behavior to the map
         svg.call(zoom);
-        // svg.call(zoom.transform, d3.zoomIdentity.translate(width / 2, height / 2));
+        
+        //  Hack for initial zoom
         svg.call(zoom.transform, d3.zoomIdentity.translate((width / 2) - 40, height / 2).scale(0.19));
 
         function zoomed() {
@@ -86,13 +85,9 @@
             projection.translate([d3.event.transform.x, d3.event.transform.y])
                         .scale(width * d3.event.transform.k);
             
-            //  Apply zoom to the states via the projection dependent path          
+            //  Apply zoom to the map via the projection dependent path          
             svg.selectAll("path").attr("d", path);
-            // countries.translate([d3.event.transform.x, d3.event.transform.y])
-            //             .scale(width * d3.event.transform.k);
-            // var countriesTransform = 'translate(' + d3.event.transform.x + ', ' + d3.event.transform.y + ')';
-            // countriesTransform += ' scale(' + (width * d3.event.transform.k) + ')';
-            // countries.attr('transform', countriesTransform);
+            
             //  Apply zoom to points on the map
             zoomPoints();
         }

@@ -54,6 +54,8 @@
         
         //  Append the zoom behavior to the map
         svg.call(zoom);
+        
+        //  Hack for initial zoom
         svg.call(zoom.transform, d3.zoomIdentity.translate(width / 2, height / 2));
 
         function zoomed() {
